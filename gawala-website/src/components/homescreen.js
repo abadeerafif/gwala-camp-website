@@ -1,9 +1,17 @@
 import React from 'react'
+import ResponsiveAppBar from '../components/Appbar';
+import MultiActionAreaCard from '../components/stockcard'
 
 const Home = () => {
   
   return (
-   <h1>abadeer</h1>
+    <div>
+    <ResponsiveAppBar></ResponsiveAppBar>
+    <MultiActionAreaCard></MultiActionAreaCard>
+    <MultiActionAreaCard></MultiActionAreaCard>
+    <MultiActionAreaCard></MultiActionAreaCard>
+    <MultiActionAreaCard></MultiActionAreaCard>
+    </div>
   )
 }
 
