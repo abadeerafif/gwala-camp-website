@@ -4,6 +4,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Redirect } from 'react-router-dom';
+import {getuserdata} from '../firebase interface/getstocks'
+import {userid,userstocks,usermoney,setsedata} from '../firebase interface/sessionstate'
 
 const firebaseConfig = {
     apiKey: "AIzaSyBj2LRr_SmVP1Aw7lxid8xVo6wy77jFha0",
@@ -23,14 +26,23 @@ const firebaseConfig = {
 const Lggincom = () => {
     const [email, setemail] = React.useState("");
     const [pass, setpass] = React.useState("");
+    const [validation, setvalidation] = React.useState("");
+    
     const handleChangemail = event => {
         setemail(event.target.value);
     }
     const handleChangepass = event => {
         setpass(event.target.value);
     }
+    if(validation=="logedin")
+    {
+        return <Redirect to='/userhome' />
+              
+
+    }
   
   return (
+    
     <Box
       component="form"
       sx={{
@@ -60,10 +72,14 @@ const Lggincom = () => {
         />
         <Button onClick={() => {
             signInWithEmailAndPassword(auth, email, pass)
-            .then((userCredential) => {
+            .then(async (userCredential) => {
               // Signed in 
               const user = userCredential.user;
               console.log(user);
+              const data=await getuserdata(email)
+              setsedata(email,data['money'],data['userstocks'])
+              setvalidation('logedin')
+              
               // ...
             })
             .catch((error) => {
