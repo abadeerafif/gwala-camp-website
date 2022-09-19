@@ -7,7 +7,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import {buystock} from '../firebase interface/getstocks'
 import {userid,userstocks,usermoney} from '../firebase interface/sessionstate'
 
-export default function MultiActionAreaCard({name,price,image,desc,numbersold,total,refrefn,sale}) {
+export default function MultiActionAreaCard({name,price,image,desc,numbersold,total,refrefn,sale,opendiafn}) {
     if(sale=="sale")
     {
         return (
@@ -36,8 +36,7 @@ export default function MultiActionAreaCard({name,price,image,desc,numbersold,to
               </CardActionArea>
               <CardActions>
                 <Button size="small" color="primary" onClick={async () => {
-                    await buystock(userid,usermoney,price,name)
-                    refrefn()
+                    opendiafn(name,numbersold)
         
                 }}
         >
