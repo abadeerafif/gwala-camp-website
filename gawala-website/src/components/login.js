@@ -36,7 +36,7 @@ const Lggincom = () => {
     }
     if(validation=="logedin")
     {
-        return <Redirect to='/Mystocks' />
+        return <Redirect to='/userhome' />
               
 
     }

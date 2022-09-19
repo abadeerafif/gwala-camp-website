@@ -36,7 +36,7 @@ export default function MultiActionAreaCard({name,price,image,desc,numbersold,to
               </CardActionArea>
               <CardActions>
                 <Button size="small" color="primary" onClick={async () => {
-                    opendiafn(name,numbersold)
+                    opendiafn(name,numbersold,price)
         
                 }}
         >

@@ -1,7 +1,7 @@
 import React from 'react'
 import ResponsiveAppBar from '../components/Appbar';
 import MultiActionAreaCard from '../components/stockcard'
-import {getstocks} from '../firebase interface/getstocks'
+import {getstocks,salestock} from '../firebase interface/getstocks'
 import {userid,userstocks,usermoney} from '../firebase interface/sessionstate'
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -18,16 +18,19 @@ const Mystocks =() => {
   const [open, setOpen] = React.useState(false);
   var selectedstockname=""
   var matoselect=0
-  const handleClickOpen = (stockname,manum) => {
+  var saleprice=0
+  const handleClickOpen = (stockname,manum,salepric) => {
     setOpen(true);
     selectedstockname=stockname
     matoselect=manum
+    saleprice=salepric
   };
 
   const handleClose = () => {
     setOpen(false);
   };
-  const handlesale = () => {
+  const handlesale =async () => {
+    await salestock(userid,Number(saleprice),selectedstockname,1)
     setOpen(false);
   };
   
@@ -109,7 +112,7 @@ const Mystocks =() => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>sale</Button>
+          <Button onClick={handlesale()}>sale</Button>
         </DialogActions>
       </Dialog>
     
