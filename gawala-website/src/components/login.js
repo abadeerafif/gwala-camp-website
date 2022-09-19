@@ -36,7 +36,7 @@ const Lggincom = () => {
     }
     if(validation=="logedin")
     {
-        return <Redirect to='/userhome' />
+        return <Redirect to='/Mystocks' />
               
 
     }
@@ -77,7 +77,8 @@ const Lggincom = () => {
               const user = userCredential.user;
               console.log(user);
               const data=await getuserdata(email)
-              setsedata(email,data['money'],data['userstocks'])
+              console.log(data);
+              setsedata(email,data['money'],data['stocks'])
               setvalidation('logedin')
               
               // ...

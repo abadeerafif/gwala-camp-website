@@ -6,16 +6,49 @@ import {userid,userstocks,usermoney} from '../firebase interface/sessionstate'
 
 
 
-const Home  =() => {
+const Mystocks =() => {
   const [stocks, setstocks] = React.useState([]);
   
   async function fetchData()
     {
       const s= await getstocks(setstocks)
-      setstocks(s)
+      console.log(userstocks);
+      for (let i = 0; i < s.length; i++) {
+        console.log("abadeer");
+        
+        var found=false
+
+        for(const property in userstocks) {
+            console.log(property);
+            console.log(s[i]);
+
+            
+            if(property==s[i]['id'])
+            {
+                console.log(property);
+                found=true
+                s[i]['soldstocks']=userstocks[property]
+                break;
+
+            }
+            
+          }
+          if(!found)
+            {
+                delete s[i];
+            }
+        
+            
+        
+        }
+        setstocks(s)
+        
+    }
+
+    
       
 
-    }
+    
   React.useEffect( ()=>{
    
     fetchData()
@@ -46,4 +79,4 @@ const Home  =() => {
 }
 
 
-export default Home
+export default Mystocks
