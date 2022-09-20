@@ -34,15 +34,7 @@ export default function MultiActionAreaCard({name,price,image,desc,numbersold,to
                   </Typography>
                 </CardContent>
               </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary" onClick={async () => {
-                    opendiafn(name,numbersold,price)
-        
-                }}
-        >
-                  {sale}
-                </Button>
-              </CardActions>
+              
             </Card>
           );
 

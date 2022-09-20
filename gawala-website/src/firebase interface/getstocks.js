@@ -121,8 +121,8 @@ export async function buystock(email,usermoney,stockprice,stockname) {
         
         console.log( stocksuser);
         await transaction.update(docRefuser, { stocks: stocksuser , money:usmoney});
-        userstocks=stocksuser
-        usermoney=usmoney
+        //userstocks=stocksuser
+        //usermoney=usmoney
         });
         
         console.log("Transaction successfully committed!");
@@ -138,69 +138,3 @@ export async function buystock(email,usermoney,stockprice,stockname) {
    
 }
 
-export async function salestock(email,stockprice,stockname,numberofstocktosale) {
-    
-   
-
-    //if all ok 
-        // increase stock price
-        // decrease user money
-    //else 
-        //inform user
-    try {
-        await runTransaction(db, async (transaction) => {
-        const docRefstock = doc(db, "stocks", stockname);
-        const sfDocstock = await transaction.get(docRefstock);
-        
-        if (!sfDocstock.exists()) {
-            throw "Document does not exist!";
-        }
-        //check if price changed
-        if(stockprice!=sfDocstock.data().price)
-        {
-
-        }
-
-        const docRefuser = doc(db, "teams", email);
-        const sfDocuser = await transaction.get(docRefuser);
-        
-        if (!sfDocuser.exists()) {
-            throw "Document does not exist!";
-        }
-
-
-        //check user money in database
-        if(sfDocuser.data().moneny<stockprice)
-        {
-
-        }
-          
-        const nestockprice = sfDocstock.data().price - (50*numberofstocktosale);
-        const nestockqu = sfDocstock.data().soldstocks - numberofstocktosale;
-        transaction.update(docRefstock, { price: nestockprice , soldstocks:nestockqu});
-        const usmoney = sfDocuser.data().money+(sfDocstock.data().price*numberofstocktosale);
-       
-        
-        var stocksuser=sfDocuser.data().stocks
-       
-        stocksuser[stockname]-=numberofstocktosale;
-        
-        
-        console.log( stocksuser);
-        await transaction.update(docRefuser, { stocks: stocksuser , money:usmoney});
-        userstocks=stocksuser
-        usermoney=usmoney
-        });
-        
-        console.log("Transaction successfully committed!");
-
-        } catch (e) {
-        console.log("Transaction failed: ", e);
-    }
-          
-    
-
-
-
-   
-}
