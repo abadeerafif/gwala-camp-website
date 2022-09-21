@@ -51,7 +51,7 @@ const Lggincom = () => {
      
       if(cookies["pass"]!=null)
       {
-        
+        setloading(true)
         console.log(cookies["pass"]);
         console.log("data retre");
         signInWithEmailAndPassword(auth, cookies["user"], cookies["pass"])
@@ -69,9 +69,14 @@ const Lggincom = () => {
               // ...
             })
             .catch((error) => {
+              removeCookie("user")
+              removeCookie("pass")
               const errorCode = error.code;
               const errorMessage = error.message;
               console.log(errorMessage);
+              alert("Login failed: "+error);
+              
+
               setloading(false)
               
             });
@@ -184,6 +189,7 @@ const Lggincom = () => {
               const errorCode = error.code;
               const errorMessage = error.message;
               console.log(errorMessage);
+              alert("Login failed: "+error);
               setloading(false)
               
             });
