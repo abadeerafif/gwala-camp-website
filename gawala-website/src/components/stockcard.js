@@ -14,13 +14,13 @@ export default function MultiActionAreaCard({name,price,image,desc,numbersold,to
   if(loading)
     {
       return (
-        <Card sx={{ maxWidth: 400 }}>
+        <Card >
           <CardActionArea>
             <CardMedia
               component="img"
               height="300"
               image={image}
-              alt="green iguana"
+              alt="image not fouud"
             />
             
           </CardActionArea>

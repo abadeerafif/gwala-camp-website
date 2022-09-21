@@ -21,6 +21,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Redirect } from 'react-router-dom';
 import {getuserdata} from '../firebase interface/getstocks'
 import {userid,userstocks,usermoney,setsedata} from '../firebase interface/sessionstate'
+import { useCookies  } from "react-cookie";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBj2LRr_SmVP1Aw7lxid8xVo6wy77jFha0",
@@ -43,6 +44,42 @@ const Lggincom = () => {
     const [shopass, setshpass] = React.useState(false);
     const [validation, setvalidation] = React.useState("");
     const [loading, setloading] = React.useState(false);
+    const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+
+    if(cookies["user"]!=null)
+    {
+     
+      if(cookies["pass"]!=null)
+      {
+        
+        console.log(cookies["pass"]);
+        console.log("data retre");
+        signInWithEmailAndPassword(auth, cookies["user"], cookies["pass"])
+            .then(async (userCredential) => {
+              // Signed in 
+              const user = userCredential.user;
+              console.log(user);
+              const data=await getuserdata(cookies["user"])
+              console.log(data);
+              setsedata(email,data['money'],data['stocks'])
+
+              setvalidation('logedin')
+
+              
+              // ...
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.log(errorMessage);
+              setloading(false)
+              
+            });
+  
+      }
+
+    }
+   
     
     const handleChangemail = event => {
         setemail(event.target.value);
@@ -134,7 +171,12 @@ const Lggincom = () => {
               const data=await getuserdata(email)
               console.log(data);
               setsedata(email,data['money'],data['stocks'])
+              setCookie('user', email);
+              setCookie('pass', pass);
+              console.log("data intilized");
+
               setvalidation('logedin')
+
               
               // ...
             })

@@ -10,6 +10,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -21,12 +22,15 @@ const Mystocks =() => {
   
   async function fetchData()
     {
-      const s= await getstocks(setstocks)
+      
+     
+      const s= await getstocks()
+      const userstocksoutput=[]
       console.log(userstocks);
       for (let i = 0; i < s.length; i++) {
         console.log("abadeer");
         
-        var found=false
+       
 
         for(const property in userstocks) {
             console.log(property);
@@ -35,23 +39,24 @@ const Mystocks =() => {
             
             if(property==s[i]['id'])
             {
+              console.log("paa",s[i]);
                 console.log(property);
-                found=true
+                
+                
                 s[i]['soldstocks']=userstocks[property]
+                userstocksoutput.push(s[i])
                 break;
 
             }
             
           }
-          if(!found)
-            {
-                delete s[i];
-            }
+         
         
             
         
         }
-        setstocks(s)
+        console.log("abadeeeeeeer",userstocksoutput);
+        setstocks(userstocksoutput)
         
     }
 
@@ -65,6 +70,11 @@ const Mystocks =() => {
    
 
   }, [])
+  if(userid==null || userstocks==null||usermoney==null)
+      {
+        console.log("abadeer redi");
+        return <Redirect to='/' />
+      }
 
   
   
@@ -73,13 +83,14 @@ const Mystocks =() => {
   
   
   console.log("abadder: ",usermoney);
+  console.log("aaaaaaaaaaa",stocks);
   
   return (
 
     <div>
 
     <ResponsiveAppBar ></ResponsiveAppBar>
-    {stocks.map(({id,data})=>(<MultiActionAreaCard name={id} price={data['price']} image= {data['logo']} desc ={data['disc'] }numbersold={data['soldstocks']} sale={"sale"} total={data['numberofstocks']} refrefn={fetchData} ></MultiActionAreaCard>))}
+    {stocks.map(({id,data,soldstocks})=>(<MultiActionAreaCard key={id} name={id} price={data['price']} image= {data['logo']} desc ={data['disc'] }numbersold={soldstocks} sale={"sale"} total={data['numberofstocks']} refrefn={fetchData} ></MultiActionAreaCard>))}
     
     
     

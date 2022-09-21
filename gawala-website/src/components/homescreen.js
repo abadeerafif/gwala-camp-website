@@ -3,11 +3,14 @@ import ResponsiveAppBar from '../components/Appbar';
 import MultiActionAreaCard from '../components/stockcard'
 import {getstocks} from '../firebase interface/getstocks'
 import {userid,userstocks,usermoney} from '../firebase interface/sessionstate'
+import { Redirect } from 'react-router-dom';
 
 
 
 const Home  =() => {
   const [stocks, setstocks] = React.useState([]);
+  
+  
   
   async function fetchData()
     {
@@ -16,12 +19,19 @@ const Home  =() => {
       
 
     }
+   
+     
   React.useEffect( ()=>{
    
     fetchData()
    
 
   }, [])
+  if(userid==null || userstocks==null||usermoney==null)
+  {
+    console.log("abadeer redi");
+    return <Redirect to='/' />
+  }
 
   
   
