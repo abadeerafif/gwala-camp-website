@@ -2,7 +2,7 @@ import { collection, getDocs,getDoc,doc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import { initializeApp } from 'firebase/app';
 import { runTransaction } from "firebase/firestore";
-import {userid,userstocks,usermoney} from '../firebase interface/sessionstate'
+import {userid,userstocks,usermoney,setuserstocks,setusermoney} from '../firebase interface/sessionstate'
 
 const firebaseConfig = {
     apiKey: "AIzaSyBj2LRr_SmVP1Aw7lxid8xVo6wy77jFha0",
@@ -88,7 +88,12 @@ export async function buystock(email,usermoney,stockprice,stockname) {
         //check if price changed
         if(stockprice!=sfDocstock.data().price)
         {
-            throw "price changed"
+            throw "stock price has changed"
+
+        }
+        if(sfDocstock.data().soldstocks>=sfDocstock.data().numberofstocks)
+        {
+            throw "no more stocks for sale"
 
         }
 
@@ -129,14 +134,15 @@ export async function buystock(email,usermoney,stockprice,stockname) {
         console.log( stocksuser);
         transaction.update(docRefuser, { stocks: stocksuser , money:usmoney});
         transaction.update(docRefstock, { price: nestockprice , soldstocks:nestockqu});
-        //userstocks=stocksuser
-        //usermoney=usmoney
+        setuserstocks(stocksuser)
+        setusermoney(usmoney)
         });
         
         console.log("Transaction successfully committed!");
 
         } catch (e) {
         console.log("Transaction failed: ", e);
+        alert("Transaction failed: "+e);
     }
           
     
