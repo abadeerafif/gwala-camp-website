@@ -66,6 +66,10 @@ export async function getstockdata(stockname) {
 }
 export async function buystock(email,usermoney,stockprice,stockname) {
     
+    if (!window.confirm("Are you sure you want to buy this stock it cannot be undone")) {
+        return 0
+        
+      } 
    
 
     //if all ok 
@@ -84,6 +88,7 @@ export async function buystock(email,usermoney,stockprice,stockname) {
         //check if price changed
         if(stockprice!=sfDocstock.data().price)
         {
+            throw "price changed"
 
         }
 
@@ -96,14 +101,16 @@ export async function buystock(email,usermoney,stockprice,stockname) {
 
 
         //check user money in database
-        if(sfDocuser.data().moneny<stockprice)
+        console.log("money : ",sfDocuser.data().money); 
+        console.log("price : ",stockprice); 
+        if(sfDocuser.data().money<stockprice)
         {
+            throw "no money"
 
         }
           
         const nestockprice = sfDocstock.data().price + 50;
         const nestockqu = sfDocstock.data().soldstocks + 1;
-        transaction.update(docRefstock, { price: nestockprice , soldstocks:nestockqu});
         const usmoney = sfDocuser.data().money-sfDocstock.data().price;
         if(sfDocuser.data().stocks[stockname]==null)
         {
@@ -120,7 +127,8 @@ export async function buystock(email,usermoney,stockprice,stockname) {
         stocksuser[stockname]++;
         
         console.log( stocksuser);
-        await transaction.update(docRefuser, { stocks: stocksuser , money:usmoney});
+        transaction.update(docRefuser, { stocks: stocksuser , money:usmoney});
+        transaction.update(docRefstock, { price: nestockprice , soldstocks:nestockqu});
         //userstocks=stocksuser
         //usermoney=usmoney
         });

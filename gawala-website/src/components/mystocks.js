@@ -79,7 +79,7 @@ const Mystocks =() => {
     <div>
 
     <ResponsiveAppBar ></ResponsiveAppBar>
-    {stocks.map(({id,data})=>(<MultiActionAreaCard name={id} price={data['price']} image= {data['logo']} desc ={data['disc'] }numbersold={data['soldstocks']} sale={"sale"} total={data['numberofstocks']} refrefn={fetchData} opendiafn={handleClickOpen} ></MultiActionAreaCard>))}
+    {stocks.map(({id,data})=>(<MultiActionAreaCard name={id} price={data['price']} image= {data['logo']} desc ={data['disc'] }numbersold={data['soldstocks']} sale={"sale"} total={data['numberofstocks']} refrefn={fetchData} ></MultiActionAreaCard>))}
     
     
     

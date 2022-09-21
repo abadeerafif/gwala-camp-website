@@ -10,3 +10,10 @@ export function setsedata(id,money,sto)
     
 }
 
+export function setuserstocks(sto)
+{
+    
+    userstocks=sto
+    
+}
+

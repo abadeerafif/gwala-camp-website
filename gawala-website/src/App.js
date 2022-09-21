@@ -10,13 +10,13 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path='/login'>
+        <Route exact path='/'>
         <Lggincom></Lggincom>
         </Route>
-        <Route exact path='/userhome'>
+        <Route exact path='/stocks'>
         <Home></Home>
         </Route>
-        <Route exact path='/Mystocks'>
+        <Route exact path='/my stocks'>
         <Mystocks></Mystocks>
         </Route>
 

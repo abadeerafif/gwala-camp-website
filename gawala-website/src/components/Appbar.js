@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {usermoney} from '../firebase interface/sessionstate'
+import { Link } from 'react-router-dom';
 const pages = ['stocks', 'my stocks','logout'];
 const settings = ['Logout'];
 
@@ -28,6 +29,11 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
+  const handleclick = (id) => {
+
+    console.log(id);
+    
+  };
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -89,7 +95,7 @@ const ResponsiveAppBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center"><Link style={{textDecoration:"none",color:"black"}} to={'/'+page}>{page}</Link></Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -121,7 +127,7 @@ const ResponsiveAppBar = () => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                <Link style={{textDecoration:"none",color:"white"}} to={'/'+page}>{page}</Link>
               </Button>
             ))}
           </Box>
