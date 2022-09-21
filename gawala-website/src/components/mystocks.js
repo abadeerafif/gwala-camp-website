@@ -27,7 +27,8 @@ const Mystocks =() => {
       const s= await getstocks()
       const userstocksoutput=[]
       console.log(userstocks);
-      for (let i = 0; i < s.length; i++) {
+      for (let i = 0; i < s.length; i++) 
+      {
         console.log("abadeer");
         
        
