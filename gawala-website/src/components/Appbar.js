@@ -14,6 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {usermoney,setusermoneyno} from '../firebase interface/sessionstate'
 import { Link } from 'react-router-dom';
+import coins from '../coins.png'
+
 const pages = ['stocks', 'my stocks','logout'];
 const settings = ['Logout'];
 
@@ -136,7 +138,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="sgs" src={coins} />
               </IconButton>
             </Tooltip>
             <Menu
