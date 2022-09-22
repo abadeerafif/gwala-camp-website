@@ -51,6 +51,7 @@ const Lggincom = () => {
      
       if(cookies["pass"]!=null)
       {
+        console.log(cookies["user"]);
         
         console.log(cookies["pass"]);
         console.log("data retre");
@@ -61,7 +62,7 @@ const Lggincom = () => {
               console.log(user);
               const data=await getuserdata(cookies["user"])
               console.log(data);
-              setsedata(email,data['money'],data['stocks'])
+              setsedata(cookies["user"],data['money'],data['stocks'])
 
               setvalidation('logedin')
 

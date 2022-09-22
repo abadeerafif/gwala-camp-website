@@ -66,10 +66,16 @@ export async function getstockdata(stockname) {
 }
 export async function buystock(email,usermoney,stockprice,stockname) {
     
+    console.log(email);
+      console.log(usermoney);
+      console.log(stockprice);
+      console.log(stockname);
     if (!window.confirm("Are you sure you want to buy this stock it cannot be undone")) {
         return 0
         
       } 
+      
+
    
 
     //if all ok 
