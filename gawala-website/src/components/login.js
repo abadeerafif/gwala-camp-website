@@ -51,7 +51,7 @@ const Lggincom = () => {
      
       if(cookies["pass"]!=null)
       {
-        setloading(true)
+        
         console.log(cookies["pass"]);
         console.log("data retre");
         signInWithEmailAndPassword(auth, cookies["user"], cookies["pass"])
@@ -77,7 +77,7 @@ const Lggincom = () => {
               alert("Login failed: "+error);
               
 
-              setloading(false)
+             
               
             });
   
