@@ -87,7 +87,7 @@ const Lggincom = () => {
    
     
     const handleChangemail = event => {
-        setemail(event.target.value);
+        setemail(event.target.value.toLowerCase());
     }
     const handleClickShowPassword = () => {
       if(shopass)
