@@ -9,26 +9,7 @@ import {BrowserRouter as Router,Route,Switch}from 'react-router-dom'
 function App() {
  
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/'>
-        <Lggincom></Lggincom>
-        </Route>
-        <Route exact path='/stocks'>
-        <Home></Home>
-        </Route>
-        <Route exact path='/my stocks'>
-        <Mystocks></Mystocks>
-        </Route>
-        <Route exact path='/logout'>
-        <Logout></Logout>
-        </Route>
-
-      </Switch>
-
-     
-
-    </Router>
+    <h1>website is under maintenance</h1>
     
   );
 }
